@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Deaflator</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Icon & Menu Strings-->
+    <string name="ic_more">More</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_features">Our Features</string>
+    <string name="nav_about">About Deaflator</string>
+    <!--Features Page Strings-->
+    <string name="btn_skip">Get Started</string>
+    <string name="tv_title_1">Translator For Everyone!</string>
+    <string name="tv_info_1">Discover our translation system to help you communicate each other. Find out our virtual avatar too!</string>
+    <string name="tv_title_2">Speech to Text to Sign Language</string>
+    <string name="tv_info_2">Translate text from speech to sign or vice versa now its super easy!</string>
+    <string name="tv_title_3">Sign Language Avatar</string>
+    <string name="tv_info_3">Want to know a little bit or more about sign language? we provided several avatars so you can learn easily!</string>
 </resources>
