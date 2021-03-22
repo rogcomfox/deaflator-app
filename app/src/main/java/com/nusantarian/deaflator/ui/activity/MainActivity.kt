@@ -1,4 +1,4 @@
-package com.nusantarian.deaflator
+package com.nusantarian.deaflator.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
