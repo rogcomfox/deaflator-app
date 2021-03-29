@@ -15,4 +15,10 @@
     <string name="tv_info_2">Translate text from speech to sign or vice versa now its super easy!</string>
     <string name="tv_title_3">Sign Language Avatar</string>
     <string name="tv_info_3">Want to know a little bit or more about sign language? we provided several avatars so you can learn easily!</string>
+    <!--Main Page Strings-->
+    <string name="text_item_1">Text to Sign Language</string>
+    <string name="text_item_2">Speech to Sign Language</string>
+    <string name="til_dropdown">Choose Translation Mode</string>
+    <string name="tv_sign_output">No File Attached</string>
+    <string name="btn_process">Process</string>
 </resources>
