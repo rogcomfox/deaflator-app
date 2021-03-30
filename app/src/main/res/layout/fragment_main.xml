@@ -55,7 +55,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/CircleImageView"
-                app:srcCompat="@drawable/ic_uk_flag" />
+                app:srcCompat="@drawable/ic_indonesia_flag" />
 
             <ImageView
                 android:id="@+id/ic_compare"
@@ -77,7 +77,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/CircleImageView"
-                app:srcCompat="@drawable/ic_indonesia_flag" />
+                app:srcCompat="@drawable/ic_uk_flag" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -122,12 +122,13 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:visibility="gone"
         app:cardCornerRadius="10dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/til_dropdown">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent"
             android:padding="15dp">
 
@@ -137,20 +138,26 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
                 android:text="@string/tv_sign_output"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Sign_language.mp4"
+                android:textColor="@color/text"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_file" />
 
             <View
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="15dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sign_output" />
+                android:background="@android:color/darker_gray" />
 
             <EditText
                 android:id="@+id/et_text_input"
@@ -159,16 +166,14 @@
                 android:layout_marginTop="15dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/nunito"
+                android:maxLines="4"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
                 android:lines="4"
-                android:maxLines="4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line" />
+                android:textSize="17sp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_procees"
+                android:id="@+id/btn_process"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -178,12 +183,13 @@
                 android:text="@string/btn_process"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                app:cornerRadius="10dp"
-                app:layout_constraintTop_toBottomOf="@id/et_text_input" />
+                app:cornerRadius="10dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <!--Card Speech Sign-->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_speech_sign"
@@ -192,13 +198,14 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:visibility="gone"
         app:cardCornerRadius="10dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/til_dropdown">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:padding="15dp">
 
             <TextView
@@ -207,37 +214,50 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
                 android:text="@string/tv_sign_output"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_data_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Sign_language.mp4"
+                android:textColor="@color/text"
+                android:textSize="17sp"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_file" />
 
             <View
                 android:id="@+id/line_1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="15dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sign_output_1" />
+                android:background="@android:color/darker_gray" />
 
-            <EditText
-                android:id="@+id/et_speech_input"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@android:color/transparent"
+                android:id="@+id/tv_result_speech"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/nunito"
                 android:gravity="top|start"
-                android:inputType="textMultiLine"
+                android:hint="Tap to Speak"
                 android:lines="4"
                 android:maxLines="4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line_1" />
+                android:textSize="17sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/img_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/ic_mic"
+                android:src="@drawable/ic_mic_black" />
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
