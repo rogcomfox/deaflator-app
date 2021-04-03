@@ -198,66 +198,75 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        app:cardCornerRadius="10dp"
         android:visibility="gone"
+        app:cardCornerRadius="10dp"
         app:layout_constraintTop_toBottomOf="@id/til_dropdown">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:padding="15dp">
 
             <TextView
-                android:id="@+id/tv_sign_output_1"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_label"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:fontFamily="@font/nunito"
-                android:text="@string/tv_sign_output"
-                android:textSize="17sp" />
+                android:text="@string/text_start_recording"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_data_1"
-                android:layout_width="match_parent"
+            <Chronometer
+                android:id="@+id/record_timer"
                 android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/nunito_semibold"
-                android:text="Sign_language.mp4"
-                android:textColor="@color/text"
-                android:textSize="17sp"
-                android:visibility="gone"
-                app:drawableStartCompat="@drawable/ic_file" />
-
-            <View
-                android:id="@+id/line_1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_result_speech"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/nunito"
-                android:gravity="top|start"
-                android:hint="Tap to Speak"
-                android:lines="4"
-                android:maxLines="4"
-                android:textSize="17sp" />
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label" />
 
-            <ImageView
-                android:id="@+id/img_record"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:contentDescription="@string/ic_mic"
-                android:src="@drawable/ic_mic_black" />
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/record_timer">
 
-        </LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_stop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/ic_mic"
+                    android:enabled="false"
+                    android:src="@drawable/ic_stop" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/ic_mic"
+                    android:src="@drawable/ic_mic" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/ic_mic"
+                    android:src="@drawable/ic_list" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

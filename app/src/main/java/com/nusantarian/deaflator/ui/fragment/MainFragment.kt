@@ -1,14 +1,11 @@
 package com.nusantarian.deaflator.ui.fragment
 
-import android.content.Intent
+import android.media.MediaRecorder
 import android.os.Bundle
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
+import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -19,6 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nusantarian.deaflator.R
 import com.nusantarian.deaflator.databinding.FragmentMainBinding
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -26,7 +25,9 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    private lateinit var speech: SpeechRecognizer
+    private var isRecording = false
+    private lateinit var recorder: MediaRecorder
+    private var recordFile = ""
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -35,72 +36,19 @@ class MainFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         _binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        speechToText()
-
         binding.icMore.setOnClickListener(this)
         binding.tvData.setOnClickListener(this)
-        binding.tvData1.setOnClickListener(this)
+        binding.fabList.setOnClickListener(this)
+        binding.fabStop.setOnClickListener(this)
+        binding.fabRecord.setOnClickListener(this)
+
+        //TODO: change this if data exist & backend ready
         binding.btnProcess.setOnClickListener {
             binding.tvSignOutput.visibility = View.GONE
             binding.tvData.visibility = View.VISIBLE
         }
 
         return binding.root
-    }
-
-    //convert speech to text
-    private fun speechToText() {
-        speech = SpeechRecognizer.createSpeechRecognizer(activity)
-        val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-
-        speech.setRecognitionListener(object : RecognitionListener {
-            override fun onReadyForSpeech(params: Bundle?) {
-            }
-
-            override fun onBeginningOfSpeech() {
-                binding.tvResultSpeech.text = ""
-                binding.tvResultSpeech.hint = "Listening....."
-            }
-
-            override fun onRmsChanged(rmsdB: Float) {
-            }
-
-            override fun onBufferReceived(buffer: ByteArray?) {
-            }
-
-            override fun onEndOfSpeech() {
-            }
-
-            override fun onError(error: Int) {
-            }
-
-            override fun onResults(results: Bundle) {
-                binding.imgRecord.setImageResource(R.drawable.ic_mic_black)
-                val data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                binding.tvResultSpeech.text = data?.get(0)
-                binding.tvData1.visibility = View.VISIBLE
-                binding.tvSignOutput1.visibility = View.GONE
-            }
-
-            override fun onPartialResults(partialResults: Bundle?) {
-            }
-
-            override fun onEvent(eventType: Int, params: Bundle?) {
-            }
-        })
-
-        binding.imgRecord.setOnTouchListener { view, motionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_UP) {
-                speech.stopListening()
-            }
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                binding.imgRecord.setImageResource(R.drawable.ic_mic_red)
-                speech.startListening(speechIntent)
-            }
-            false
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -111,9 +59,7 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     private fun changeButtonState() {
         binding.etTextInput.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 binding.btnProcess.isEnabled = s.isNotEmpty()
@@ -146,14 +92,74 @@ class MainFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ic_more -> raisePopup()
+            R.id.ic_more ->
+                raisePopup()
             R.id.tv_data ->
                 findNavController()
                         .navigate(MainFragmentDirections.actionMainFragmentToShowVideoFragment())
-            R.id.tv_data_1 ->
+            R.id.fab_list ->
                 findNavController()
-                        .navigate(MainFragmentDirections.actionMainFragmentToShowVideoFragment())
+                        .navigate(MainFragmentDirections.actionMainFragmentToListRecordingsFragment())
+            R.id.fab_record -> {
+                if (isRecording) {
+                    stopRecording()
+                    binding.fabRecord.isEnabled = true
+                    binding.fabStop.isEnabled = false
+                    isRecording = false
+                } else {
+                    startRecording()
+                    binding.fabRecord.isEnabled = false
+                    binding.fabStop.isEnabled = true
+                    isRecording = true
+                }
+            }
+            R.id.fab_stop -> {
+                if (isRecording) {
+                    stopRecording()
+                    binding.fabRecord.isEnabled = true
+                    binding.fabStop.isEnabled = false
+                    isRecording = false
+                } else {
+                    startRecording()
+                    binding.fabRecord.isEnabled = false
+                    binding.fabStop.isEnabled = true
+                    isRecording = true
+                }
+            }
         }
+    }
+
+    private fun stopRecording() {
+        binding.recordTimer.stop()
+        binding.tvLabel.text = requireActivity().resources.getString(R.string.text_stop_record, recordFile)
+        recorder.stop()
+        recorder.release()
+    }
+
+    private fun startRecording() {
+        binding.recordTimer.base = SystemClock.elapsedRealtime()
+        binding.recordTimer.start()
+
+        val recordPath = requireActivity().getExternalFilesDir("/")!!.absolutePath
+        val sdf = SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ROOT)
+        val date = Date()
+        recordFile = "${sdf.format(date)}.mp3"
+
+        binding.tvLabel.text = requireActivity().resources.getString(R.string.text_start_record, recordFile)
+
+        recorder = MediaRecorder()
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        recorder.setOutputFile("$recordPath/$recordFile")
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
+        try {
+            recorder.prepare()
+        } catch (e: IOException) {
+            Toast.makeText(context, e.printStackTrace().toString(), Toast.LENGTH_SHORT).show()
+        }
+
+        recorder.start()
     }
 
     private fun raisePopup() {
@@ -182,10 +188,5 @@ class MainFragment : Fragment(), View.OnClickListener {
             }
         }
         popup.show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        speech.destroy()
     }
 }
