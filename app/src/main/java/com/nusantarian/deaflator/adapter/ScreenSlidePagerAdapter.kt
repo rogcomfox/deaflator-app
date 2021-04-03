@@ -6,9 +6,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.nusantarian.deaflator.ui.fragment.FeaturesContentFragment
 
 class ScreenSlidePagerAdapter(
-    fragment: Fragment,
-    private val list: List<Array<String>>,
-    val page: Int
+        fragment: Fragment,
+        private val list: List<Array<String>>,
+        private val page: Int
 ) :
     FragmentStateAdapter(fragment) {
 
