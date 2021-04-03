@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_showVideoFragment"
             app:destination="@id/showVideoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listRecordingsFragment"
+            app:destination="@id/listRecordingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/virtualPageFragment"
@@ -43,4 +46,13 @@
         android:name="com.nusantarian.deaflator.ui.fragment.ShowVideoFragment"
         android:label="fragment_show_video"
         tools:layout="@layout/fragment_show_video" />
+    <fragment
+        android:id="@+id/listRecordingsFragment"
+        android:name="com.nusantarian.deaflator.ui.fragment.ListRecordingsFragment"
+        android:label="fragment_list_recordings"
+        tools:layout="@layout/fragment_list_recordings">
+        <action
+            android:id="@+id/action_listRecordingsFragment_to_showVideoFragment"
+            app:destination="@id/showVideoFragment" />
+    </fragment>
 </navigation>
