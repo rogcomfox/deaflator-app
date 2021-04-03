@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_audio"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:adjustViewBounds="true"
+        android:background="@color/primary"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_play"
+        app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+    <TextView
+        android:id="@+id/tv_title_recording"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/img_audio"
+        android:fontFamily="@font/nunito_semibold"
+        android:textColor="@color/text"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_recording"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/img_audio"
+        android:fontFamily="@font/nunito"
+        android:textSize="15sp" />
+
+</RelativeLayout>
