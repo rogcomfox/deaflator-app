@@ -4,6 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--Icon & Menu Strings-->
     <string name="ic_more">More</string>
+    <string name="ic_mic">Microphone</string>
+    <string name="ic_stop">Stop Recording</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_features">Our Features</string>
     <string name="nav_about">About Deaflator</string>
@@ -18,8 +20,12 @@
     <!--Main Page Strings-->
     <string name="text_item_1">Text to Sign Language</string>
     <string name="text_item_2">Speech to Sign Language</string>
+    <string name="text_start_recording">Press the Mic Button to Start Recording</string>
     <string name="til_dropdown">Choose Translation Mode</string>
     <string name="tv_sign_output">No File Attached</string>
     <string name="btn_process">Process</string>
-    <string name="ic_mic">Microphone</string>
+    <string name="ic_list">List Recording</string>
+    <string name="tv_no_recordings">No Recordings Available</string>
+    <string name="text_start_record">Recording.. filename: %1$s</string>
+    <string name="text_stop_record">Recording stopped, file saved as %1$s</string>
 </resources>
