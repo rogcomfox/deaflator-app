@@ -45,7 +45,11 @@
         android:id="@+id/showVideoFragment"
         android:name="com.nusantarian.deaflator.ui.fragment.ShowVideoFragment"
         android:label="fragment_show_video"
-        tools:layout="@layout/fragment_show_video" />
+        tools:layout="@layout/fragment_show_video">
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/listRecordingsFragment"
         android:name="com.nusantarian.deaflator.ui.fragment.ListRecordingsFragment"

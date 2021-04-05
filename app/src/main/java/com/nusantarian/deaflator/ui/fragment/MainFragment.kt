@@ -94,9 +94,14 @@ class MainFragment : Fragment(), View.OnClickListener {
         when (v.id) {
             R.id.ic_more ->
                 raisePopup()
-            R.id.tv_data ->
-                findNavController()
-                        .navigate(MainFragmentDirections.actionMainFragmentToShowVideoFragment())
+            R.id.tv_data -> {
+                if (binding.etTextInput.text.toString() == "ayo")
+                    findNavController()
+                            .navigate(MainFragmentDirections.actionMainFragmentToShowVideoFragment("come on"))
+                else
+                    findNavController()
+                            .navigate(MainFragmentDirections.actionMainFragmentToShowVideoFragment("dinner"))
+            }
             R.id.fab_list ->
                 findNavController()
                         .navigate(MainFragmentDirections.actionMainFragmentToListRecordingsFragment())

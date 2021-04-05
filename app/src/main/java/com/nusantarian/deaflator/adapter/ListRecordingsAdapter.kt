@@ -32,7 +32,7 @@ class ListRecordingsAdapter(private val allFiles: Array<File>) :
 
                 holder.itemView.setOnClickListener { view ->
                     view.findNavController()
-                            .navigate(ListRecordingsFragmentDirections.actionListRecordingsFragmentToShowVideoFragment())
+                            .navigate(ListRecordingsFragmentDirections.actionListRecordingsFragmentToShowVideoFragment("dummy link"))
                 }
             }
         }
